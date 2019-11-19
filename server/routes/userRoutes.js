@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
 const db = require('./../db')
+const {check, validationResult} = require('express-validator')
 
 const saltRounds = 10
 
@@ -37,7 +38,7 @@ router.post(
                     console.log(error)
                     res.status(500).json({ error: "Problem with hashing the password" })
                 }
-                db.get().collection('users').insertOne({'userName': req.body.username, 'emailAddress': req.body.email,'password': hashedPassword }, (error, result) => {
+                db.get().collection('users').insertOne({'userName': req.body.username, 'emailAddress': req.body.email,'password': hashedPassword, 'messages':[]}, (error, result) => {
                     if (error){
                         console.log(error)
                         res.status(500).json({ error: "Couldn't create user"})
@@ -94,4 +95,4 @@ router.post(
         }
 })
 
-module.exports = router;
+module.exports = router
