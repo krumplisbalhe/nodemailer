@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
 const db = require('./../db')
-const { check, validationResult } = require('express-validator')
 
 const saltRounds = 10
 
@@ -54,25 +53,45 @@ router.post(
         }
 })
 
-// router.post('/users/signin', async(req,res) => {
-//     const user = await db.get().collection('users').find({userName: req.body.username})
-//     // const users = await User.query().select().where({username: req.body.username}).limit(1)
-//     // const user = users[0]
 
-//     if (user) {
-//         bcrypt.compare(req.body.password, user.password, (error, response) => {
-//             if (error) {
-//                 res.status(500).json({ response: "Problem hashing the password" });
-//             }
-//             if (response === true) {
-//                 res.status(200).json({"response ": "nice"});
-//             } else {
-//                 res.status(401).json({});
-//             }
-//         });
-//     } else {
-//         res.status(401).json({"response": "User missing"});
-//     }
-// })
+router.post(
+    '/users/signin',
+    [
+        check('username')
+            .not()
+            .isEmpty()
+            .withMessage('Username is missing.'),
+        check('password')
+            .not()
+            .isEmpty()
+            .withMessage('Password is missing.')
+    ],
+    async (req,res) => {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            console.log(errors)
+            return res.status(400).json({ error: errors.array() })
+        }
+
+        const users = await db.get().collection('users').find({"userName": req.body.username}).toArray()
+        const user = users[0]
+
+        if (user) {
+            bcrypt.compare(req.body.password, user.password, (error, response)  => {
+                if (error) {
+                    console.log(error)
+                    return res.status(500).json({error: "Problem hashing the password." })
+                }
+                if (response === true) {
+                    console.log(response)
+                    res.status(200).json({response: `${user.userName} is authorized.`})
+                } else {
+                    res.status(400).json({error: `${user.userName} is not authorized.`})
+                }
+            })
+        } else {
+            res.status(400).json({response: "User doesn't exist."})
+        }
+})
 
 module.exports = router;

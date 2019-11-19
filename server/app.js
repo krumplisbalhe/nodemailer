@@ -3,11 +3,13 @@ const app = express()
 const db = require('./db')
 
 const userRoute = require('./routes/userRoutes')
+const emailRoute = require('./routes/emailRoutes')
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.use(userRoute)
+app.use(emailRoute)
 
 db.connect(() => {
 	const server = app.listen(8080, (error) => {
