@@ -21,7 +21,6 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      console.log(errors)
       return res.status(400).json({error: errors.array()})
     }
 
@@ -35,28 +34,23 @@ router.post(
     if (req.body.username && req.body.email && req.body.password) {
       bcrypt.hash(req.body.password, saltRounds, async (error, hashedPassword) => {
         if (error) {
-          console.log(error)
-          res.status(500).json({error: 'Problem with hashing the password'})
+          return res.status(500).json({error: 'Problem with hashing the password'})
         }
         db.get().collection('users').insertOne({
           userName: req.body.username,
           emailAddress: req.body.email,
           password: hashedPassword,
           messages: []
-        }, (error, result) => {
-          if (error) {
-            console.log(error)
-            res.status(500).json({error: 'Couldn\'t create user'})
-          } else {
-            console.log(result)
-            res.status(200).json(result)
+        }, (err) => {
+          if (err) {
+            return res.status(500).json({error: 'Couldn\'t create user'})
           }
         })
       })
     } else {
-      console.log(error)
-      res.status(400).json({response: 'Required user data for signup is missing.'})
+      return res.status(400).json({response: 'Required user data for signup is missing.'})
     }
+    return res.status(200).json({response: `Profile for ${req.body.username} has been created.`})
   }
 )
 
@@ -75,7 +69,6 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      console.log(errors)
       return res.status(400).json({error: errors.array()})
     }
 
@@ -85,11 +78,9 @@ router.post(
     if (user) {
       bcrypt.compare(req.body.password, user.password, (error, response) => {
         if (error) {
-          console.log(error)
-          return res.status(500).json({error: 'Problem hashing the password.'})
+          return res.status(500).json({error: 'Password is not correct.'})
         }
         if (response === true) {
-          console.log(response)
           res.status(200).json({response: `${user.userName} is authorized.`, userData: user})
         } else {
           res.status(400).json({error: `${user.userName} is not authorized.`})

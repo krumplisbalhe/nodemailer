@@ -1,15 +1,15 @@
 const express = require('express')
 const db = require('./db')
-const userRoute = require('./routes/userRoutes')
-const emailRoute = require('./routes/emailRoutes')
+const userRoutes = require('./routes/userRoutes')
+const emailRoutes = require('./routes/emailRoutes')
 
 const app = express()
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.use(userRoute)
-app.use(emailRoute)
+app.use(userRoutes)
+app.use(emailRoutes)
 
 db.connect(() => {
   const server = app.listen(8080, (error) => {
