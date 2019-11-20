@@ -78,7 +78,7 @@ router.post(
     if (user) {
       bcrypt.compare(req.body.password, user.password, (error, response) => {
         if (error) {
-          return res.status(500).json({error: 'Password is not correct.'})
+          return res.status(500).json({error: 'Problem with password.'})
         }
         if (response === true) {
           res.status(200).json({response: `${user.userName} is authorized.`, userData: user})
