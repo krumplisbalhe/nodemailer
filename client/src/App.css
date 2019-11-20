@@ -32,7 +32,6 @@
 input, textarea{
 	outline: none;
   background-color: white;
-  /* box-shadow: 3px 6px 19px -10px #CCCCCC; */
   border: 3px solid var(--orange);
   border-radius: 25px;
   padding: 15px;
@@ -46,4 +45,8 @@ input, textarea{
   cursor: pointer;
   font-weight: bold;
   font-size: 13px;
+}
+
+.button{
+  align-self: center;
 }

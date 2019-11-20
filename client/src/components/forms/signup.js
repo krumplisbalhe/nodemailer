@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import './signup.css'
 
 function Signup() {
   const [signupData, setSignupData] = useState({username: '', email: '', password: ''})
@@ -33,7 +34,7 @@ function Signup() {
         <input type="email" name="email" onChange={event => handleSignupDataChange('email', event.target.value)}></input>
         <label htmlFor="password">Password</label>
         <input type="password" name="password" onChange={event => handleSignupDataChange('password', event.target.value)}></input>
-        <input type="submit" value="Log-in"></input>
+        <input className="button" type="submit" value="Sign up"></input>
       </form>
     </div>
   )
