@@ -1,0 +1,23 @@
+.App{
+  height: 100vh;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 4fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn";
+}
+
+.navColumn {
+  grid-area: navColumn;
+  background-color: red;
+}
+
+.profileColumn {
+  grid-area: profileColumn;
+  background-color: pink;
+}
+
+.messageColumn {
+  grid-area: messageColumn;
+  background-color: green;
+}
