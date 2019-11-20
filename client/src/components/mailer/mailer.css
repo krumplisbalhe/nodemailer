@@ -1,0 +1,20 @@
+.mailer{
+  height: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.button{
+  align-self: center;
+}
+
+label{
+  padding-left: 40px;
+}

@@ -1,0 +1,40 @@
+.profile{
+  height: 100%;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr 3fr;
+}
+
+h2{
+  padding-top: 100px;
+}
+.avatar{
+  vertical-align: middle;
+  width: 50px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.messages{
+  overflow-y: scroll;
+  margin-bottom: 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.message{
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.smaller{
+  font-size: 13px;
+}

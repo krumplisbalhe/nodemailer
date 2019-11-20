@@ -7,17 +7,43 @@
   grid-template-areas: "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn" "navColumn profileColumn messageColumn";
 }
 
+.logo{
+  height: 100%;
+  width: 100%;
+}
+
 .navColumn {
   grid-area: navColumn;
-  background-color: red;
+  background-color: var(--nude);
 }
 
 .profileColumn {
   grid-area: profileColumn;
-  background-color: pink;
+  background-color: var(--green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .messageColumn {
   grid-area: messageColumn;
-  background-color: green;
+}
+
+input, textarea{
+	outline: none;
+  background-color: white;
+  /* box-shadow: 3px 6px 19px -10px #CCCCCC; */
+  border: 3px solid var(--orange);
+  border-radius: 25px;
+  padding: 15px;
+  margin: 15px;
+  margin-top: 5px;
+  width: 300px;
+}
+
+.button, button{
+  background-color: var(--orange);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
 }
