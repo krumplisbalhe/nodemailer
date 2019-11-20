@@ -18,6 +18,9 @@ function Signup() {
     .then(res => res.json())
     .then(response => {
       console.log(response)
+      if(response.code === 1){
+        window.location.href = 'http://localhost:3000/signin'
+      }
     })
   }
 
