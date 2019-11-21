@@ -40,6 +40,10 @@ input, textarea{
   width: 300px;
 }
 
+textarea{
+  height: 150px;
+}
+
 .button, button{
   background-color: var(--orange);
   cursor: pointer;

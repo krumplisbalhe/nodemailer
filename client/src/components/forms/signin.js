@@ -4,27 +4,26 @@ import './signin.css'
 function Signin() {
   const [signinData, setSigninData] = useState({username: '', password: ''})
   const [authorizedUser, setAuthorizedUser] = useState()
-
   const handleSigninDataChange = (key, value) => {
-    setSigninData({...signinData, [key]: value});
+    setSigninData({...signinData, [key]: value})
   }
 
   console.log(authorizedUser)
 
-  const submit = event => {
+  const submit = (event) => {
     event.preventDefault()
-    fetch("http://localhost:8080/users/signin", {
+    fetch('http://localhost:8080/users/signin', {
       method: 'POST',
       body: JSON.stringify(signinData),
       headers: {
         'Content-Type': 'application/json'
     }
     })
-    .then(res => res.json())
-    .then(response => {
-      console.log(response)
-      setAuthorizedUser(response.userData)
-      window.location.href = 'http://localhost:3000/profile'
+      .then(res => res.json())
+      .then(response => {
+        console.log(response)
+        setAuthorizedUser(response.userData)
+        window.location.href = 'http://localhost:3000/profile'
     })
   }
 

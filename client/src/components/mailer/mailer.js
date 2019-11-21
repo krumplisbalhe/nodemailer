@@ -31,7 +31,7 @@ function Mailer({user}) {
         <label htmlFor="subject">Subject</label>
         <input type="text" name="subject" onChange={event => handleMailDataChange('subject', event.target.value)}></input>
         <label htmlFor="text">Text</label>
-        <input type="textarea" name="text" onChange={event => handleMailDataChange('text', event.target.value)}></input>
+        <textarea name="text" onChange={event => handleMailDataChange('text', event.target.value)}></textarea>
         <input className="button" type="submit" value="Send"></input>
       </form>
     </div>

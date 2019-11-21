@@ -21,7 +21,7 @@ function App() {
         </div>
         <div className="profileColumn">
           <Switch>
-            <Route exact path="/(|signup|signin)/" render={() => <img  src={Email} />} />
+            <Route exact path="/(|signup|signin)/" render={() => <img src={Email} alt="logo" />} />
           </Switch>
           <Switch>
             <Route
