@@ -2,7 +2,7 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import './nav.css'
 
-function Nav({isUserAuthenticated = true}) {
+function Nav({isUserAuthenticated}) {
   return (
     <div className="nav">
       {isUserAuthenticated

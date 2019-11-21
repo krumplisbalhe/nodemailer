@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css'
 import './global.css'
 import Mailer from './components/mailer/mailer'
@@ -11,13 +11,20 @@ import Email from './assets/email.png'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 function App() {
-  const user = { "_id" : "5dd48a774833425651bea332", "userName" : "Dori", "emailAddress" : "dora@kukac.com", "password" : "$2b$10$JwSQb75Q3lA6WZapdsi5t.ZjYyRf/6oZcLAGT1sdHt2CTIjmTHnu6", "messages" : [ { "to" : "radovicsrita@gmail.com", "subject" : "Doritol", "text" : "Doritol jott a level!" } ] }
+  const [authorizedUser, setAuthorizedUser] = useState()
+
+  const isUserAuthenticated = authorizedUser != null 
+
+  const pullUpState = (value) => {
+    setAuthorizedUser(value)
+    console.log(value)
+  }
 
   return (
     <Router>
       <div className="App">
         <div className="navColumn">
-          <Nav/>
+          <Nav isUserAuthenticated={isUserAuthenticated} />
         </div>
         <div className="profileColumn">
           <Switch>
@@ -26,7 +33,7 @@ function App() {
           <Switch>
             <Route
               exact path="/profile"
-              render={() => <Profile user={user} />}
+              render={authorizedUser ? (() => <Profile user={authorizedUser} />) : ''}
             />
           </Switch>
         </div>
@@ -46,13 +53,13 @@ function App() {
           <Switch>
             <Route
               exact path="/signin"
-              render={() => <Signin/>}
+              render={() => <Signin pullUpState={pullUpState} />}
             />
           </Switch>
           <Switch>
             <Route
               exact path="/profile"
-              render={() => <Mailer user={user} />}
+              render={authorizedUser ? (() => <Mailer user={authorizedUser} />) : ''}
             />
           </Switch>
         </div>

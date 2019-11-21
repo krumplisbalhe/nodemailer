@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
+import { useHistory } from "react-router-dom"
 import './signin.css'
 
-function Signin() {
+function Signin({pullUpState}) {
+  const history = useHistory()
   const [signinData, setSigninData] = useState({username: '', password: ''})
-  const [authorizedUser, setAuthorizedUser] = useState()
   const handleSigninDataChange = (key, value) => {
     setSigninData({...signinData, [key]: value})
   }
-
-  console.log(authorizedUser)
 
   const submit = (event) => {
     event.preventDefault()
@@ -22,8 +21,8 @@ function Signin() {
       .then(res => res.json())
       .then(response => {
         console.log(response)
-        setAuthorizedUser(response.userData)
-        window.location.href = 'http://localhost:3000/profile'
+        pullUpState(response.userData)
+        history.push('/profile')
     })
   }
 
