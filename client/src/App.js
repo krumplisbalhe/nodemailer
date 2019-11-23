@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-import './App.css'
-import './global.css'
 import Mailer from './components/mailer/mailer'
 import Signin from './components/forms/signin'
 import Signup from './components/forms/signup'
@@ -9,11 +7,13 @@ import Profile from './components/profile/profile'
 import Nav from './components/nav/nav'
 import Email from './assets/email.png'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import './App.css'
+import './global.css'
 
 function App() {
   const [authorizedUser, setAuthorizedUser] = useState()
 
-  const isUserAuthenticated = authorizedUser != null 
+  const isUserAuthenticated = authorizedUser != null
 
   const pullUpState = (value) => {
     setAuthorizedUser(value)
@@ -24,7 +24,7 @@ function App() {
     <Router>
       <div className="App">
         <div className="navColumn">
-          <Nav isUserAuthenticated={isUserAuthenticated} />
+          <Nav isUserAuthenticated={isUserAuthenticated} pullUpState={pullUpState} />
         </div>
         <div className="profileColumn">
           <Switch>
@@ -59,7 +59,7 @@ function App() {
           <Switch>
             <Route
               exact path="/profile"
-              render={authorizedUser ? (() => <Mailer user={authorizedUser} />) : ''}
+              render={authorizedUser ? (() => <Mailer user={authorizedUser} pullUpState={pullUpState} />) : ''}
             />
           </Switch>
         </div>

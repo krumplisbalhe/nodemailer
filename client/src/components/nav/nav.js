@@ -2,7 +2,7 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import './nav.css'
 
-function Nav({isUserAuthenticated}) {
+function Nav({isUserAuthenticated, pullUpState}) {
   return (
     <div className="nav">
       {isUserAuthenticated
@@ -11,7 +11,7 @@ function Nav({isUserAuthenticated}) {
             <NavLink activeClassName="isActive" to="/profile">
               <i className="fas fa-envelope-open-text fa-2x" />
             </NavLink>
-            <NavLink activeClassName="isActive" to="/signout">
+            <NavLink to="/" onClick={()=>pullUpState(null)}>
               <i className="fas fa-door-open fa-2x" />
             </NavLink>
           </>
