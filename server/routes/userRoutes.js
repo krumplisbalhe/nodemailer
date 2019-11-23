@@ -25,16 +25,16 @@ router.post(
     }
 
     if (await db.get().collection('users').find({userName: req.body.username}).count() !== 0) {
-      return res.status(400).json({error: 'Username already exists.'})
+      return res.status(400).json({error: [{msg: 'Username already exists.'}] })
     }
     if (await db.get().collection('users').find({emailAddress: req.body.email}).count() !== 0) {
-      return res.status(400).json({error: 'Email already exists.'})
+      return res.status(400).json({error: [{msg: 'Email already exists.'}] })
     }
 
     if (req.body.username && req.body.email && req.body.password) {
       bcrypt.hash(req.body.password, saltRounds, async (error, hashedPassword) => {
         if (error) {
-          return res.status(500).json({error: 'Problem with hashing the password'})
+          return res.status(500).json({error: [{msg: 'Problem with hashing the password'}] })
         }
         db.get().collection('users').insertOne({
           userName: req.body.username,
@@ -43,14 +43,14 @@ router.post(
           messages: []
         }, (err) => {
           if (err) {
-            return res.status(500).json({error: 'Couldn\'t create user'})
+            return res.status(500).json({error: [{msg: 'Couldnt create user'}] })
           } else {
           return res.status(200).json({code: 1, response: `Profile for ${req.body.username} has been created.`})
           }
         })
       })
     } else {
-      return res.status(400).json({response: 'Required user data for signup is missing.'})
+      return res.status(400).json({error: [{msg: 'Required user data for signup is missing.'}] })
     }
   }
 )
@@ -79,16 +79,16 @@ router.post(
     if (user) {
       bcrypt.compare(req.body.password, user.password, (error, response) => {
         if (error) {
-          return res.status(500).json({error: 'Problem with password.'})
+          return res.status(500).json({error: [ {msg: 'Problem with password.'}] })
         }
         if (response === true) {
-          res.status(200).json({response: `${user.userName} is authorized.`, userData: user})
+          res.status(200).json({code: 1, response: `${user.userName} is authorized.`, userData: user})
         } else {
-          res.status(400).json({error: `${user.userName} is not authorized.`})
+          res.status(400).json({error:[ {msg: `${user.userName} is not authorized.`}]})
         }
       })
     } else {
-      res.status(400).json({response: 'User doesn\'t exist.'})
+      res.status(400).json({error:[ {msg: 'User doesnt exist.'} ]})
     }
   }
 )
