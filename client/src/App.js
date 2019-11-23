@@ -24,6 +24,10 @@ function App() {
     setErrorMessage(value)
   }
 
+  const closeErrorDiv = () =>{
+    setErrorMessage(null)
+  }
+
   return (
     <Router>
       <div className="App">
@@ -67,7 +71,7 @@ function App() {
             />
           </Switch>
           {errorMessage && (
-            <p className="errorMessage">{errorMessage}</p>
+            <p className="errorMessage">{errorMessage} <i className="fas fa-times closeMessage" onClick={()=>closeErrorDiv()} /></p>
           )}
         </div>
       </div>

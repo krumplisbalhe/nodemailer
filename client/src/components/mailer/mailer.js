@@ -26,6 +26,7 @@ function Mailer({user, pullUpState, pullUpErrorMessage}) {
       .then(response => {
         if (response.code === 1) {
           pullUpState(response.userData)
+          pullUpErrorMessage(response.response)
         }
         if (response.error) {
           pullUpErrorMessage(response.error[0].msg)

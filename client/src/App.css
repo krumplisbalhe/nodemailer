@@ -66,3 +66,8 @@ textarea{
   padding: 20px 0px;
   color: white;
 }
+
+.closeMessage{
+  cursor: pointer;
+  padding-left: 50px;
+}
