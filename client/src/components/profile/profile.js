@@ -6,9 +6,7 @@ function Profile({user}) {
   return (
     <div className="profile">
       <h2>
-        Hi
-        {user.userName}
-        !
+        Hi {user.userName}!
       </h2>
       <img src={avatar} className="avatar" alt="avatar" style={{width: '100px', height: '100px'}} />
       <div className="messages">

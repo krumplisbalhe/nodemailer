@@ -58,9 +58,11 @@ textarea{
 }
 
 .errorMessage{
-  position: fixed;
-  bottom: 20px;
+  position: relative;
+  bottom: 120px;
   width: 100%;
-  background: pink;
+  background-color: #EB9591;
   text-align: center;
+  padding: 20px 0px;
+  color: white;
 }
