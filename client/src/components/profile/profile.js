@@ -14,10 +14,10 @@ function Profile({user}) {
           <div className="message" key={item.time}>
             <p className="bold">{item.to}</p>
             <p className="smaller">{item.subject}</p>
-            <p className="smaller">{item.time}</p>
+            <p className="smaller">{`${new Date(item.time).toLocaleDateString("en-US", { hour: 'numeric', minute: 'numeric', weekday: 'long', day: 'numeric', month: 'short' })}`}</p>
             <p>{item.text}</p>
           </div>
-        ))}
+        )).reverse()}
       </div>
     </div>
   )

@@ -12,12 +12,16 @@ import './global.css'
 
 function App() {
   const [authorizedUser, setAuthorizedUser] = useState()
+  const [errorMessage, setErrorMessage] = useState()
 
   const isUserAuthenticated = authorizedUser != null
 
   const pullUpState = (value) => {
     setAuthorizedUser(value)
-    console.log(value)
+  }
+
+  const pullUpErrorMessage = (value) => {
+    setErrorMessage(value)
   }
 
   return (
@@ -47,21 +51,24 @@ function App() {
           <Switch>
             <Route
               exact path="/signup"
-              render={() => <Signup />}
+              render={() => <Signup pullUpErrorMessage={pullUpErrorMessage} />}
             />
           </Switch>
           <Switch>
             <Route
               exact path="/signin"
-              render={() => <Signin pullUpState={pullUpState} />}
+              render={() => <Signin pullUpState={pullUpState} pullUpErrorMessage={pullUpErrorMessage} />}
             />
           </Switch>
           <Switch>
             <Route
               exact path="/profile"
-              render={authorizedUser ? (() => <Mailer user={authorizedUser} pullUpState={pullUpState} />) : ''}
+              render={authorizedUser ? (() => <Mailer user={authorizedUser} pullUpState={pullUpState} pullUpErrorMessage={pullUpErrorMessage }/>) : ''}
             />
           </Switch>
+          {errorMessage && (
+            <p className="errorMessage">{errorMessage}</p>
+          )}
         </div>
       </div>
     </Router>

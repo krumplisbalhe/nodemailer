@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useHistory } from "react-router-dom"
 import './signin.css'
 
-function Signin({pullUpState}) {
+function Signin({pullUpState, pullUpErrorMessage}) {
   const history = useHistory()
   const [signinData, setSigninData] = useState({username: '', password: ''})
   const handleSigninDataChange = (key, value) => {
@@ -20,9 +20,14 @@ function Signin({pullUpState}) {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
-        pullUpState(response.userData)
-        history.push('/profile')
+        if(response.code === 1){
+          pullUpState(response.userData)
+          pullUpErrorMessage(null)
+          history.push('/profile')
+        }
+        if(response.error){
+          pullUpErrorMessage(response.error[0].msg)
+        }
     })
   }
 

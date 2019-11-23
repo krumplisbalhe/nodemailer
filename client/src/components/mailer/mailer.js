@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './mailer.css'
 
-function Mailer({user, pullUpState}) {
+function Mailer({user, pullUpState, pullUpErrorMessage}) {
   const [mailData, setmailData] = useState({to: '', subject:'', text: '', username: user.userName})
 
   const handleMailDataChange = (key, value) => {
@@ -19,8 +19,12 @@ function Mailer({user, pullUpState}) {
     })
     .then(res => res.json())
     .then(response => {
-      console.log(response)
-      pullUpState(response.userData)
+      if(response.code===1){
+        pullUpState(response.userData)
+      }
+      if(response.error){
+        pullUpErrorMessage(response.error[0].msg)
+      }
     })
   }
 

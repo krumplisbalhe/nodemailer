@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './signup.css'
 
-function Signup() {
+function Signup({pullUpErrorMessage}) {
   const [signupData, setSignupData] = useState({username: '', email: '', password: ''})
   const handleSignupDataChange = (key, value) => {
     setSignupData({...signupData, [key]: value});
@@ -18,9 +18,11 @@ function Signup() {
     })
     .then(res => res.json())
     .then(response => {
-      console.log(response)
       if(response.code === 1){
         window.location.href = 'http://localhost:3000/signin'
+      }
+      if(response.error){
+        pullUpErrorMessage(response.error[0].msg)
       }
     })
   }
