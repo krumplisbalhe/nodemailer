@@ -47,7 +47,7 @@ router.post(
       }
       main().catch(console.error)
     } else {
-      res.status(400).json({error:[{msg: 'Required data to send email is missing.'}]})
+      res.status(400).json({error: [{msg: 'Required data to send email is missing.'}]})
     }
   }
 )
