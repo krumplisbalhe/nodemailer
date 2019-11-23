@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Mailer from './components/mailer/mailer'
 import Signin from './components/forms/signin'
 import Signup from './components/forms/signup'
@@ -6,7 +7,6 @@ import Landing from './components/landing/landing'
 import Profile from './components/profile/profile'
 import Nav from './components/nav/nav'
 import Email from './assets/email.png'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './App.css'
 import './global.css'
 
@@ -42,7 +42,7 @@ function App() {
           </Switch>
         </div>
         <div className="messageColumn">
-        <Switch>
+          <Switch>
             <Route
               exact path="/"
               render={() => <Landing />}
@@ -63,7 +63,7 @@ function App() {
           <Switch>
             <Route
               exact path="/profile"
-              render={authorizedUser ? (() => <Mailer user={authorizedUser} pullUpState={pullUpState} pullUpErrorMessage={pullUpErrorMessage }/>) : ''}
+              render={authorizedUser ? (() => <Mailer user={authorizedUser} pullUpState={pullUpState} pullUpErrorMessage={pullUpErrorMessage} />) : ''}
             />
           </Switch>
           {errorMessage && (

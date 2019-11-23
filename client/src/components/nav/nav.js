@@ -11,7 +11,7 @@ function Nav({isUserAuthenticated, pullUpState}) {
             <NavLink activeClassName="isActive" to="/profile">
               <i className="fas fa-envelope-open-text fa-2x" />
             </NavLink>
-            <NavLink to="/" onClick={()=>pullUpState(null)}>
+            <NavLink to="/" onClick={() => pullUpState(null)}>
               <i className="fas fa-door-open fa-2x" />
             </NavLink>
           </>
