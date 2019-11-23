@@ -37,13 +37,14 @@ router.post(
         const mailOptions = {
           to: req.body.to,
           subject: req.body.subject,
-          html: req.body.text
+          html: `Your friend, ${req.body.username} says: ${req.body.text} `
         }
 
         transporter.sendMail(mailOptions, async () => {
-          await db.get().collection('users').updateMany({userName: req.body.username}, {$push: {messages: {to: req.body.to, subject: req.body.subject, text: req.body.text}}})
-          const userData = await db.get().collection('users').find({userName: req.body.username}).toArray()
-          return res.status(200).json({response: `Email has been sent to ${req.body.to}`, userData})
+          await db.get().collection('users').updateMany({userName: req.body.username}, {$push: {messages: {to: req.body.to, subject: req.body.subject, text: req.body.text, time: Date.now()}}})
+          const users = await db.get().collection('users').find({userName: req.body.username}).toArray()
+          const user = users[0]
+          return res.status(200).json({response: `Email has been sent to ${req.body.to}`, userData: user})
         })
       }
       main().catch(console.error)

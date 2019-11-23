@@ -44,13 +44,14 @@ router.post(
         }, (err) => {
           if (err) {
             return res.status(500).json({error: 'Couldn\'t create user'})
+          } else {
+          return res.status(200).json({code: 1, response: `Profile for ${req.body.username} has been created.`})
           }
         })
       })
     } else {
       return res.status(400).json({response: 'Required user data for signup is missing.'})
     }
-    return res.status(200).json({response: `Profile for ${req.body.username} has been created.`})
   }
 )
 
